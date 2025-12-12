@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -54,5 +53,11 @@ class AuthController extends Controller
             'message' => 'As credenciais fornecidas estão inválidas'
         ], 401);
 
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAcessToken()->delete();
+        Auth::logout();
     }
 }
